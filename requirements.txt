@@ -1,7 +1,15 @@
+autopep8==1.5.4
 certifi==2020.11.8
 chardet==3.0.4
+flake8==3.8.4
 idna==2.10
+mccabe==0.6.1
+progress==1.5
+pycodestyle==2.6.0
+pyflakes==2.2.0
+python-dotenv==0.15.0
 requests==2.25.0
 six==1.15.0
 spotipy==2.16.1
+toml==0.10.2
 urllib3==1.26.2
