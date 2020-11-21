@@ -78,5 +78,9 @@ class SqlClient:
         for row in results:
             data.append(row[0])
         return data
+
     def __del__(self):
+        """
+        This method is called when the object gets deleted. Leveraged to close the connection on object garbage collection.
+        """
         self._conn.close()
