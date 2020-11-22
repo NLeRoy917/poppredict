@@ -148,6 +148,44 @@ class SqlClient:
         for row in results:
             data.append(row[0])
         return data
+    
+    def key_pop_data(self):
+        """
+        Get a dictionary of song keys that associate with a list of popularity values
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Key 
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Key': row[1]
+            })
+        return data
+    
+    def time_sig_pop_data(self):
+        """
+        Get a dictionary of song time_signatures that associate with a list of popularity values
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Time_Signature
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Time_Signature': row[1]
+            })
+        return data
 
     def __del__(self):
         """

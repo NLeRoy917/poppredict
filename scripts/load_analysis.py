@@ -40,13 +40,35 @@ def chunk_tracks(tracks, n=100):
 
 if __name__ == '__main__':
     tracks = sql.get_all_tracks()
-    id_gen_bar = Bar('Analyzing tracks...', max=len(tracks))
+    feature_bar = Bar('Analyzing tracks...', max=len(tracks))
     tracks_chunked = chunk_tracks(tracks)
     features_full = []
     for chunk in tracks_chunked:
         ids = [t['ID'] for t in chunk]
         features_chunk = sp.audio_features(ids)
-        print(features_chunk)
-        features_full.append(features_chunk)
+        for feature in features_chunk:
+            try:
+                sql.insert_analysis(uri=feature['uri'],
+                                    id=feature['id'],
+                                    acousticness=feature['acousticness'],
+                                    danceability=feature['danceability'],
+                                    duration_ms=feature['duration_ms'],
+                                    energy=feature['energy'],
+                                    instrumentalness=feature['instrumentalness'],
+                                    key=feature['key'],
+                                    liveness=feature['liveness'],
+                                    loudness=feature['loudness'],
+                                    mode=feature['mode'],
+                                    speechiness=feature['speechiness'],
+                                    tempo=feature['tempo'],
+                                    time_signature=feature['time_signature'],
+                                    valence=feature['valence'])
+                feature_bar.next()
+            except:
+                continue
+    
+    feature_bar.finish()
+                
+
     
 

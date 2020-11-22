@@ -5,7 +5,6 @@ import sys
 sys.path.append('..')
 
 from sql.SQLite import SqlClient
-from spotify.Spotify import Spotify
 
 sql = SqlClient(db_file='../data.db')
 
