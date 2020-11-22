@@ -64,7 +64,77 @@ class SqlClient:
             VALUES(?, ?, ?, ?, ?, ?);
             '''
         self._execute(q, data=(name, artist, uri, id, href, popularity))
-    
+
+    def insert_analysis(self, uri=None, id=None, acousticness=None,
+                        danceability=None, duration_ms=None, energy=None,
+                        instrumentalness=None, key=None, liveness=None,
+                        loudness=None, mode=None, speechiness=None,
+                        tempo=None, time_signature=None, valence=None):
+        """
+        Insert an analysis datapoint into the database
+        :param uri: The URI of a track
+        :param id: The tracks id
+        :param acousticness: The acousticness of a track (0 -> 1.0)
+        :param danceability: The danceability of a track (0 -> 1.0)
+        :param duration_ms: Duration of a track in milliseconds
+        :param energy: The energy of a track (0 -> 1.0)
+        :param instrumentalness: The instrumentalness of a track (0 -> 1.0)
+        :param key: The track's key (pitch key notation)
+        :param liveness: The tracks liveness (0 -> 1.0)
+        :param loudness: The tracks loudness (0 -> 1.0)
+        :param mode: The tracks mode (major/minor [1/0])
+        :param speechiness: The track's speechiness (0 -> 1.0)
+        :param tempo: A tracks tempo in bpm
+        :param time_signature: time signature of a track (3->7, x/4)
+        :param valence: A track's valence (0 -> 1.0)
+        """
+        q = '''
+            INSERT INTO AnalysisData (URI, ID, Acousticness, Danceability,
+                                      Duration_ms, Energy, Instrumentalness,
+                                      Key, Liveness, Loudness, Mode, Speechiness,
+                                      Tempo, Time_Signature, Valence)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            '''
+        self._execute(
+            q,
+            data=(
+                uri,
+                id,
+                acousticness,
+                danceability,
+                duration_ms,
+                energy,
+                instrumentalness,
+                key,
+                liveness,
+                loudness,
+                mode,
+                speechiness,
+                tempo,
+                time_signature,
+                valence))
+
+    def get_all_tracks(self):
+        """
+        Pull all the track objects from the database
+        """
+        q = '''
+            SELECT Name, Artist, URI, ID, href, Popularity
+            FROM TrackData
+            '''
+        results = self._query(q)
+        tracks = []
+        for row in results:
+            tracks.append({
+                'Name': row[0],
+                'Artist': row[1],
+                'URI': row[2],
+                'ID': row[3],
+                'href': row[4],
+                'Popularity': row[5]
+            })
+        return tracks
+
     def popularity_data(self):
         """
         Get all the populrity data-points in an array from the database

@@ -48,3 +48,11 @@ class Spotify():
 
         return self._spotify.search(q, limit=1, offset=offset, type='track')[
             'tracks']['items'][0]
+    
+    def audio_features(self, ids):
+        """
+        Get audio features for several tracks
+        :param ids: a list of track ids
+        """
+        features = self._spotify.audio_features(tracks=ids)
+        return features
