@@ -186,6 +186,63 @@ class SqlClient:
                 'Time_Signature': row[1]
             })
         return data
+    
+    def danceability_pop_data(self):
+        """
+        Get a list of danceability-popularity datapoints
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Danceability
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Danceability': row[1]
+            })
+        return data
+
+    def energy_pop_data(self):
+        """
+        Get a list of energy-popularity datapoints
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Energy
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Energy': row[1]
+            })
+        return data
+
+    def loudness_pop_data(self):
+        """
+        Get a list of loudness-popularity datapoints
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Loudness
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Loudness': row[1]
+            })
+        return data
 
     def __del__(self):
         """
