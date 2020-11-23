@@ -243,6 +243,25 @@ class SqlClient:
                 'Loudness': row[1]
             })
         return data
+    
+    def tempo_pop_data(self):
+        """
+        Get's a list of datapoints on a song's tempo and popularity
+        """
+        q = '''
+            SELECT TrackData.Popularity, AnalysisData.Tempo
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append({
+                'Popularity': row[0],
+                'Tempo': row[1]
+            })
+        return data
 
     def __del__(self):
         """
