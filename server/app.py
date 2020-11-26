@@ -5,7 +5,7 @@ from flask import request
 from flask import render_template
 from flask import send_from_directory
 from flask_cors import CORS
-app = Flask(__name__, static_folder='../ui/dist')
+app = Flask(__name__, static_folder='./dist')
 CORS(app)
 
 ##

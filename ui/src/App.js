@@ -13,11 +13,10 @@ const App = () => {
         <div>
           <Router>
             <Switch>
-              <Route path="/query-data" component={<QueryData />}></Route>
-              <Route path="/" component={<Home />}></Route>
+              <Route path="/query-data/" component={QueryData}></Route>
+              <Route path="/" component={Home}></Route>
             </Switch>
           </Router>
-          <Home />
         </div>
     );
 }
