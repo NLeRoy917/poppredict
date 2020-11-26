@@ -6,7 +6,7 @@ const Button = (props) => {
         <>
            <button
              {...props}
-             className={styles.buttonLarge}
+             className={styles.buttonMedium}
            >
                {props.children}
            </button>
