@@ -1,0 +1,57 @@
+.buttonSmall {
+    padding: 10px;
+    margin: 5px;
+    background-color: #ff4154;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0px 8px 15px rgba(34, 34, 34, 0.1);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+}
+.buttonSmall:focus {
+    outline: none;
+}
+.buttonSmall:hover {
+    transform: translate(0px,-6px);
+}
+
+.buttonMedium {
+    padding: 17.5px;
+    margin: 5px;
+    background-color: #ff4154;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0px 8px 15px rgba(37, 37, 37, 0.1);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+}
+.buttonMedium:focus {
+    outline: none;
+}
+.buttonMedium:hover {
+    transform: translate(0px,-6px);
+}
+
+.buttonLarge {
+    padding: 25px;
+    margin: 5px;
+    background-color: #ff4154;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    color: white;
+    font-weight: 500;
+    box-shadow: 0px 8px 15px rgba(26, 26, 26, 0.199);
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s;
+    border: solid #ff4154 1px;
+}
+.buttonLarge:focus {
+    outline: none;
+}
+.buttonLarge:hover {
+    transform: translate(0px,-6px);
+}

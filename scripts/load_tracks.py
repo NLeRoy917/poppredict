@@ -24,7 +24,19 @@ sql = SqlClient(db_file=args.db)
 id_gen_bar = Bar('Finding tracks...', max=args.n)
 for i in range(args.n):
     try:
+        # search for a track on spotify
+        # check if it already exists in the database
         track = sp.get_random_song()
+        exists = sql.check_track_exists(track['id'])
+
+        # while already existing in the database
+        # get another and re-check
+        while exists:
+            track = sp.get_random_song()
+            exists = sql.check_track_exists(track['id'])
+        
+        # once we get out of the above loop...
+        # insert the track
         sql.insert_track(
             name=track['name'],
             artist=track['artists'][0]['name'],
@@ -32,10 +44,14 @@ for i in range(args.n):
             id=track['id'],
             href=track['href'],
             popularity=track['popularity'])
+
+    # catch keyboard interupt     
     except KeyboardInterrupt:
         print('Stopping ...')
         sys.exit(0)
+    
     except:
         continue
+
     id_gen_bar.next()
 id_gen_bar.finish()

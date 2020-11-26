@@ -10,7 +10,7 @@
             "request": "launch",
             "program": "${file}",
             "cwd": "${workspaceRoot}",
-            "console": "integratedTerminal"
+            "console": "integratedTerminal",
         }
     ]
 }

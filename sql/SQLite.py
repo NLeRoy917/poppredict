@@ -46,6 +46,23 @@ class SqlClient:
         else:
             self._cur.execute(exec)
         self._conn.commit()
+    
+    def check_track_exists(self, id):
+        """
+        Check to see if a track already exists in the database
+
+        :param id: the track id
+        """
+        q = '''
+            SELECT 1
+            FROM TrackData
+            WHERE ID = ?
+            '''
+        result = self._query(q,data=(id,))
+        if len(result) == 0:
+            return False
+        else:
+            return True
 
     def insert_track(self, name=None, artist=None,
                      uri=None, id=None, href=None, popularity=None):
