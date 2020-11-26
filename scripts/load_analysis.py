@@ -9,7 +9,7 @@ from sql.SQLite import SqlClient
 from spotify.Spotify import Spotify
 
 parser = argparse.ArgumentParser(description='Load track data into the db')
-parser.add_argument('--db', dest='db', default='data.db',
+parser.add_argument('--db', dest='db', default='../data.db',
                     help='Path to database file for sqlite')
 args = parser.parse_args()
 

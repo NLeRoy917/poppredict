@@ -279,6 +279,35 @@ class SqlClient:
                 'Tempo': row[1]
             })
         return data
+    
+    def get_training_validation_data(self):
+        """
+        Method to get a set of training and validation data from the database. Can be called as such:
+            x_train, y_train, x_valid, y_valid = SqlClient.get_training_validation_data()
+        """
+        q = '''
+            SELECT AnalysisData.Acousticness, 
+                   AnalysisData.Danceability, 
+				   AnalysisData.Energy, 
+				   AnalysisData.Instrumentalness,
+				   AnalysisData.Key,
+				   AnalysisData.Liveness,
+				   AnalysisData.Loudness,
+				   AnalysisData.Mode,
+				   AnalysisData.Speechiness,
+				   AnalysisData.Tempo,
+				   AnalysisData.Time_Signature,
+				   AnalysisData.Valence,
+				   TrackData.Popularity
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        data = []
+        for row in results:
+            data.append(list(row))
+        return data
 
     def __del__(self):
         """
