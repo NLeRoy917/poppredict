@@ -1,4 +1,6 @@
 import sqlite3
+import random
+import numpy as np
 
 
 class SqlClient:
@@ -280,10 +282,12 @@ class SqlClient:
             })
         return data
     
-    def get_training_validation_data(self):
+    def get_training_validation_data(self, training_split=0.8):
         """
         Method to get a set of training and validation data from the database. Can be called as such:
             x_train, y_train, x_valid, y_valid = SqlClient.get_training_validation_data()
+        
+        :param training_split: decimal - split data according to this value - default is 80% training (and thus 20% validation)
         """
         q = '''
             SELECT AnalysisData.Acousticness, 
@@ -304,10 +308,49 @@ class SqlClient:
             ON TrackData.ID = AnalysisData.ID
             '''
         results = self._query(q)
-        data = []
-        for row in results:
-            data.append(list(row))
-        return data
+        random.shuffle(results)
+        data = np.array(results)
+        data_length = len(data)
+
+        # split data into inputs and outputs (x and y)
+        x_full = data[:,:-1]
+        y_full = data[:,-1]
+
+        x_train = x_full[:int(data_length*training_split)]
+        y_train = y_full[:int(data_length*training_split)]
+
+        x_valid = x_full[int(data_length*training_split):]
+        y_valid = y_full[int(data_length*training_split):]
+
+        return x_train, y_train, x_valid, y_valid
+    
+    def get_random_datapoint(self):
+        """
+        Simply gets a random datapoint from the database
+        """
+        q = '''
+            SELECT AnalysisData.Acousticness, 
+                   AnalysisData.Danceability, 
+				   AnalysisData.Energy, 
+				   AnalysisData.Instrumentalness,
+				   AnalysisData.Key,
+				   AnalysisData.Liveness,
+				   AnalysisData.Loudness,
+				   AnalysisData.Mode,
+				   AnalysisData.Speechiness,
+				   AnalysisData.Tempo,
+				   AnalysisData.Time_Signature,
+				   AnalysisData.Valence,
+				   TrackData.Popularity
+            FROM TrackData
+            INNER JOIN AnalysisData
+            ON TrackData.ID = AnalysisData.ID
+            '''
+        results = self._query(q)
+        random.shuffle(results)
+        data = np.array(results)
+        return data[0,:]
+
 
     def __del__(self):
         """

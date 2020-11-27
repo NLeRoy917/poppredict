@@ -1,9 +1,19 @@
+import tensorflow as tf
+
 from poppredict import PopPredict
 from sql import SQLite
 
-if __name__ == '__main__':
-    sql = SQLite.SqlClient()
-    pp = PopPredict.PopPredict()
-    data = sql.get_training_validation_data()
-    # print(data[:20])
-    pp.summary()
+sql = SQLite.SqlClient(db_file='data.db')
+pp = PopPredict.PopPredict(path='./model/')
+
+random = sql.get_random_datapoint()
+inputs = random[:-1]
+popularity = random[-1]
+
+print(inputs.shape)
+pp.summary()
+pop_predict = pp.predict(inputs)
+
+
+
+
