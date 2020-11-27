@@ -8,8 +8,13 @@
     padding: 15px;
 }
 
+.buttonWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
 .generateButton {
-    padding: 17.5px;
+    padding: 10px;
     margin: 5px;
     background-color: #ff4154;
     border: none;
