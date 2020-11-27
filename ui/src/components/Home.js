@@ -6,16 +6,16 @@ import Button from './Button';
 
 const Home = () => {
     let history = useHistory();
-    const goQueryData = () => {
-        history.push('/query-data')
+    const goPredict = () => {
+        history.push('/predict')
     }
     return(
         <>
          <div className={styles.landing}>
          <h1>Pop-Predict Playground</h1>
           <div className={styles.buttonWrapper}>
-              <Button onClick={() => goQueryData()}>
-                Query Data
+              <Button onClick={() => goPredict()}>
+                Predict popularity
               </Button>
             <Button
               style={{background: 'white', color: '#ff4154', border: 'white 1px solid'}}

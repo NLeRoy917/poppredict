@@ -5,7 +5,7 @@ import {
     Switch
   } from "react-router-dom";
 import Home from './components/Home';
-import QueryData from './components/QueryData';
+import Predict from './components/Predict';
 import './styles/App.css';
 
 const App = () => {
@@ -13,7 +13,7 @@ const App = () => {
         <div>
           <Router>
             <Switch>
-              <Route path="/query-data/" component={QueryData}></Route>
+              <Route path="/predict/" component={Predict}></Route>
               <Route path="/" component={Home}></Route>
             </Switch>
           </Router>

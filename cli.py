@@ -12,7 +12,8 @@ popularity = random[-1]
 
 print(inputs.shape)
 pp.summary()
-pop_predict = pp.predict(inputs)
+pop_predict = pp.predict(tf.expand_dims(inputs, axis=0))
+print('Real:',popularity, '|', 'Prediction:', pop_predict[0][0])
 
 
 
