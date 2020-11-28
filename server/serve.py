@@ -5,7 +5,7 @@ from flask import request
 from flask import render_template
 from flask import send_from_directory
 from flask_cors import CORS
-app = Flask(__name__, static_folder='./dist')
+app = Flask(__name__)
 CORS(app)
 
 ##
@@ -24,7 +24,7 @@ def items():
 # Testing route/main route
 @app.route('/')
 def base():
-	return send_from_directory(app.static_folder, 'index.html')
+	return 'Hello'
 
 if __name__ == '__main__':
 	app.run()

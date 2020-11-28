@@ -1,8 +1,7 @@
 import React from 'react';
 import styles from '../styles/Predict.module.css'
-import Button from './Button';
 
-import Query from './Query';
+
 
 const Predict = (props) => {
     return(

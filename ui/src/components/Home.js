@@ -9,6 +9,9 @@ const Home = () => {
     const goPredict = () => {
         history.push('/predict')
     }
+    const goView = () => {
+      history.push('/view-data')
+  }
     return(
         <>
          <div className={styles.landing}>
@@ -19,8 +22,9 @@ const Home = () => {
               </Button>
             <Button
               style={{background: 'white', color: '#ff4154', border: 'white 1px solid'}}
+              onClick={() => goView()}
             >
-                Run Script
+                View Data
             </Button>
           </div>
          </div>
